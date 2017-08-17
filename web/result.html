@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>恶意域名检测 - 查询结果</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+
+
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script src="echarts/echarts.min.js"></script>
+	<script src="echarts/world.js"></script>
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+</head>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Logo" class="img-responsive logo" style="float: left"></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的域名...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">检测</button>
+						</div>
+					</div>
+					<ul>
+						<li><a href="index.html" style="color: white"><strong>概览</strong></a></li>
+						<li><a href="IPlocation.html" style="color: white"><strong>域名分布</strong></a></li>
+						<li><a href="malicious.html" style="color: white"><strong>恶意域名</strong></a></li>
+						<li><a href="model.html" style="color: white"><strong>在线模型</strong></a></li>
+						<li class="has-dropdown">
+							<a style="color: white"><strong>帮助</strong></a>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="introduction.html" style="color: black"><strong>系统介绍</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载恶意域名列表" id="download" style="color: white"><a href="../malicious.list"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg); height: 110px">
+		<div class="overlay"></div>
+	</header>
+
+	<div class="fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" style="height: 50px"></div>
+				<h1 class="text-center">检测结果</h1>
+				<div class="col-md-12" style="height: 25px"></div>
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6">
+							<div id="map" style="width: 100%; height: 400px"></div>
+						</div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>域名：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="url" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>IP：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="ip1" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                    <div id="ip2" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                    <div id="ip3" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                    <div id="ip4" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>国家：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="location" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>城市：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="city" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>注册时间：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="time" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="weekly-summary text-right" style="font-size: x-large">
+                                        <span>安全性：</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div id="security" class="weekly-summary text-left" style="font-size: x-large">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2017 <a href="about.html" target="_blank" title="Wings">Wings</a> - <a>当然是选择原谅它</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+<script type="text/javascript">
+    var mapChart = echarts.init(document.getElementById('map'));
+    mapChart.showLoading();
+
+    function makeMapData(rawData) {
+        var mapData = [];
+        for (var i = 0; i < rawData.length; i++) {
+            var geoCoord = geoCoordMap[rawData[i][0]];
+            if (geoCoord) {
+                mapData.push({
+                    name: rawData[i][0],
+                    value: geoCoord.concat(rawData[i].slice(1))
+                });
+            }
+        }
+        return mapData;
+    }
+
+    var geoCoordMap;
+    var rawData;
+    var code1 = '{';
+    var code2 = '[';
+
+    var geturl = window.location.href.split('#')[1];
+    var country;
+    var time;
+    var security;
+    var ip1;
+    var ip2;
+    var ip3;
+    var ip4;
+    var city;
+    var color1;
+    var color2;
+
+    document.getElementById('url').innerHTML = geturl;
+
+    $.ajax({
+            type: "get",
+            async: true,
+            url: "../query.php?domain=" + geturl,
+	        timeout: 30000,
+	        dataType: "json",
+            success: function(result) {
+                ip1 = (result[0].ip1 == 'null') ? '未知' : result[0].ip1;
+                ip2 = (result[0].ip2 == 'null') ? '' : result[0].ip2;
+                if(ip2 == ip1){
+                    ip2 = '';
+                }
+                ip3 = (result[0].ip3 == 'null') ? '' : result[0].ip3;
+                if(ip3 == ip1 || ip3 == ip2){
+                    ip3 = '';
+                }
+                ip4 = (result[0].ip4 == 'null') ? '' : result[0].ip4;
+                if(ip4 == ip1 || ip4 == ip2 || ip4 == ip3){
+                    ip4 = '';
+                }
+                country = (result[0].country == 'None' || result[0].country == null) ? '未知' : result[0].country;
+                city = (result[0].city == 'None' || result[0].city == null) ? '未知' : result[0].city;
+                time = (result[0].time == 'None'  || result[0].time == null) ? '未知' : result[0].time;
+                switch(result[0].result){
+			        case '1':
+			            security = '安全';
+                        color1 = '#048e0b';
+                        color2 = '#3dd44a';
+			            break;
+			        case '-1':
+			            security =  '恶意';
+                        color1 = '#010101';
+                        color2 = '#b00706';
+			            break;
+                    default:
+                        security = '未知';
+                        color1 = '#a4a609';
+                        color2 = '#e6e70b';
+                        break;
+		        }
+		        document.getElementById('ip1').innerHTML = ip1;
+		        document.getElementById('ip2').innerHTML = ip2;
+                document.getElementById('ip3').innerHTML = ip3;
+                document.getElementById('ip4').innerHTML = ip4;
+                document.getElementById('location').innerHTML = country;
+                document.getElementById('city').innerHTML = city;
+                document.getElementById('time').innerHTML = time;
+                document.getElementById('security').innerHTML = security;
+
+                if(result[0].longitude == 'None' || result[0].longitude == null || result[0].latitude == 'None' || result[0].latitude == null || result[0].country == 'None' || result[0].country == null){
+                    geoCoordMap = {};
+                    rawData = [];
+                }
+                else {
+                    code1 += '\"';
+                    code1 += result[0].country;
+                    if(result[0].city == 'None' || result[0].city == null){}
+                    else{
+                        code1 += ':';
+                        code1 += result[0].city;
+                    }
+                    code1 += '\": [';
+                    code1 += result[0].longitude;
+                    code1 += ',';
+                    code1 += result[0].latitude;
+                    code1 += ']}';
+                    code2 += '[\"';
+                    code2 += result[0].country;
+                    if(result[0].city == 'None' || result[0].city == null){}
+                    else{
+                        code2 += ':';
+                        code2 += result[0].city;
+                    }
+                    code2 += '\"]]';
+                    geoCoordMap = eval('(' + code1 + ')');
+                    rawData = eval('(' + code2 + ')');
+                }
+
+                option = {
+                    backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 0.4, [{
+                        offset: 0,
+                        color: '#4b5769'
+                    }, {
+                        offset: 1,
+                        color: '#404a59'
+                    }]),
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (params) {
+                            return params.name;
+                        }
+                    },
+                    geo: {
+                        map: 'world',
+                        silent: true,
+                        label: {
+                            emphasis: {
+                                show: false,
+                                areaColor: '#eee'
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 0.2,
+                                borderColor: '#404a59'
+                            }
+                        },
+                        roam: true
+
+                    },
+
+                    series: [
+                        {
+                            name: '查询结果',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            symbolSize: 20,
+                            data: makeMapData(rawData),
+                            activeOpacity: 1,
+                            label: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    borderColor: color1,
+                                    color: color2
+                                }
+                            }
+                        }
+                    ]
+                };
+
+                mapChart.hideLoading();
+                mapChart.setOption(option);
+            },
+            error: function() {
+                alert("请求数据失败!");
+            }
+        });
+
+</script>
+
+	<script>
+        var legalArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','-','.'];
+        function search() {
+            var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('域名不能为空！');
+            }
+            else {
+                var flag = true;
+                if(input.split('.')[0] == 'www'){
+                    input = input.substring(4,input.length);
+                }
+                if(input.length > 66 || input.split('.').length > 3){
+                    flag = false;
+                }
+                for(var i = 0; i < input.length; i++){
+                    if(legalArray.indexOf(input[i]) > -1){}
+                    else{
+                        alert(input[i]);
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == false){
+                    alert('输入域名不合法');
+                }
+                else{
+                    window.location = 'result.html#' + input;
+                    location.reload();
+                }
+            }
+        }
+
+        $('#getUrl').bind('keydown',function(event){
+            if(event.keyCode == "13") {
+                var input = document.getElementById('getUrl').value;
+                if(input === ''){
+                    alert('域名不能为空！');
+                }
+                else {
+                    var flag = true;
+                    var illegal = '';
+                    if(input.split('.')[0] == 'www'){
+                        input = input.substring(4,input.length);
+                    }
+                    if(input.length > 66 || input.split('.').length > 3){
+                        flag = false;
+                    }
+                    for(var i = 0; i < input.length; i++){
+                        if(legalArray.indexOf(input[i]) > -1){}
+                        else{
+                            alert(input[i]);
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        alert('输入域名不合法');
+                    }
+                    else{
+                        window.location = 'result.html#' + input;
+                        location.reload();
+                    }
+                }
+            }
+        });
+
+	</script>
+	</body>
+</html>
+

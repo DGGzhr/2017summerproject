@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>恶意域名检测 - 帮助</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+
+
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+</head>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Logo" class="img-responsive logo" style="float: left"></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的域名...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">检测</button>
+						</div>
+					</div>
+					<ul>
+						<li><a href="index.html" style="color: white"><strong>概览</strong></a></li>
+						<li><a href="IPlocation.html" style="color: white"><strong>域名分布</strong></a></li>
+						<li><a href="malicious.html" style="color: white"><strong>恶意域名</strong></a></li>
+						<li><a href="model.html" style="color: white"><strong>在线模型</strong></a></li>
+						<li class="has-dropdown">
+							<button style="height: 40px; background-color: #1e2839;border-width: 0px"><a style="color: white"><strong>帮助</strong></a></button>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="introduction.html" style="color: black"><strong>系统介绍</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载恶意域名列表" id="download" style="color: white"><a href="../malicious.list"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg); height: 110px">
+		<div class="overlay"></div>
+	</header>
+	
+	<div id="fh5co-services">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="index.html"><i class="icon-home"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="index.html" style="color: black">概览</a></h3>
+							<p>介绍系统的主界面，提供本系统众多功能的链接以及清晰明了的信息。主要显示系统运行的时间，检测出的域名数以及检出的恶意运行数，同时显示恶意域名的地区分布已近最近检测出来的恶意域名条目。</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="index.html"><i class="icon-search"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="index.html" style="color: black">查询域名</a></h3>
+							<p>查询域名是系统的核心检测功能，可以根据的所提供的域名用我们系统所构建的模型进行检测，显示ip信息，位置信息，注册的时间，安全性等问题。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="charts.html"><i class="icon-pie-chart"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="charts.html" style="color: black">图表</a></h3>
+							<p>用折线图的方式显示最近五天的检测结果，可以实时显示最近的数据流量以及检测出的恶意域名数量。下方显示恶意域名最多的五个区域和出现次数最多的五个域名。</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="IPlocation.html"><i class="icon-map"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="IPlocation.html" style="color: black">恶意域名分布</a></h3>
+							<p>左边显示恶意域名分布最多的5个地区，右边地图上把出现的恶意域名地区用红点标出，红点的密集程度也在一定程度上形象地显示了恶意域名的分布密集程度。点击红点可以显示所在国家的恶意域名。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="malicious.html"><i class="icon-text"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="malicious.html" style="color: black">恶意域名列表</a></h3>
+							<p>在最上边显示目前出现的次数最多的五个恶意域名，在下面显示最近检测出的恶意域名（只显示最近的300页，更多数据请看下载），这些恶意域名在刷新页面是会显示实时情况。</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="model.html"><i class="icon-cloud2"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="model.html" style="color: black">在线模型</a></h3>
+							<p>在线模型提供了一个可以和我们标定模型互动的接口，对于其更新数据的前500组数据，如果对于其自动化标定结果不满意，可以通过人工查阅网站进行人工标定，在完成修改并提交之后系统会把改动数据加入当前运行的模型并加以更新，使本系统的结果更加准确。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="introduction.html"><i class="icon-speech-bubble"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="introduction.html" style="color: black">系统介绍</a></h3>
+							<p>用图文结合的方式对我们的系统进行介绍，具体讲解了系统架构，系统大致组成的三大部分，在线学习的系统架构和云平台处理示意图。</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 animate-box">
+					<div class="feature-center">
+					<span class="icon icon2">
+						<a href="index.html"><i class="icon-download"></i></a>
+					</span>
+						<div class="desc">
+							<h3><a href="index.html" style="color: black">列表下载</a></h3>
+							<p>提供本系统检测出的所有恶意域名的下载链接，为相关工作者提供一个参考资料。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-started">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>开始检测域名</h2>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-6 col-md-offset-3 col-sm-6">
+						<button class="btn btn-default btn-block" onclick="start()">Start</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2017 <a href="about.html" target="_blank" title="Wings">Wings</a> - <a>当然是选择原谅它</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<script>
+    	function start() {
+        	window.location = 'index.html';
+    	}
+	</script>
+
+<script>
+    var legalArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','-','.'];
+    function search() {
+        var input = document.getElementById('getUrl').value;
+        if(input === ''){
+            alert('域名不能为空！');
+        }
+        else {
+            var flag = true;
+            if(input.split('.')[0] == 'www'){
+                input = input.substring(4,input.length);
+            }
+            if(input.length > 66 || input.split('.').length > 3){
+                flag = false;
+            }
+            for(var i = 0; i < input.length; i++){
+                if(legalArray.indexOf(input[i]) > -1){}
+                else{
+                    alert(input[i]);
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag == false){
+                alert('输入域名不合法');
+            }
+            else{
+                window.location = 'result.html#' + input;
+            }
+        }
+    }
+
+    $('#getUrl').bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('域名不能为空！');
+            }
+            else {
+                var flag = true;
+                var illegal = '';
+                if(input.split('.')[0] == 'www'){
+                    input = input.substring(4,input.length);
+                }
+                if(input.length > 66 || input.split('.').length > 3){
+                    flag = false;
+                }
+                for(var i = 0; i < input.length; i++){
+                    if(legalArray.indexOf(input[i]) > -1){}
+                    else{
+                        alert(input[i]);
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == false){
+                    alert('输入域名不合法');
+                }
+                else{
+                    window.location = 'result.html#' + input;
+                }
+            }
+        }
+    });
+
+</script>
+
+	</body>
+</html>
+

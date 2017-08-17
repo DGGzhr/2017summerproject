@@ -1,0 +1,501 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>恶意域名检测 - 国家</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+
+
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script src="echarts/echarts.min.js"></script>
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+</head>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Logo" class="img-responsive logo" style="float: left"></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的域名...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">检测</button>
+						</div>
+					</div>
+					<ul>
+						<li><a href="index.html" style="color: white"><strong>概览</strong></a></li>
+						<li><a href="IPlocation.html" style="color: white"><strong>域名分布</strong></a></li>
+						<li><a href="malicious.html" style="color: white"><strong>恶意域名</strong></a></li>
+						<li><a href="model.html" style="color: white"><strong>在线模型</strong></a></li>
+						<li class="has-dropdown">
+							<a style="color: white"><strong>帮助</strong></a>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="introduction.html" style="color: black"><strong>系统介绍</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载恶意域名列表" id="download" style="color: white"><a href="../malicious.list"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg);height: 110px">
+		<div class="overlay"></div>
+	</header>
+
+	<div id="fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 animate-box">
+					<div class="col-md-12 text-center">
+						<div style="height: 50px"></div>
+						<div class="col-md-12 text-center">
+							<span id="countryName" style="color: black;font-size: xx-large"></span>
+						</div>
+						<div class="col-md-12 text-center" style="height:70px;">
+							<span id="countryNumber" style="color: black;font-size: x-large"></span>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<table class="table table-hover" style="color: black">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>IP地址</th>
+							<th>域名</th>
+							<th>检出时间</th>
+							<th>城市</th>
+						</tr>
+						</thead>
+						<tbody id="tb1"></tbody>
+					</table>
+					<div style="height: 1000px;width: 100%" id="loadingChart"></div>
+						<div class="col-md-12 text-center">
+							<a id="front" class="btn btn-primary" onclick="frontPage()" href="#">上一页</a>
+							<span id="nowpage" style="color: black"></span>
+							<a id="next" class="btn btn-primary" onclick="nextPage()" href="#">下一页</a>
+							<input id="inputPage" type="number" style="width: 50px" min="1"></input>
+							<a id="jump" class="btn btn-primary" onclick="jumpPage()">跳转</a>
+						</div>
+					<div style="height: 100px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2017 <a href="about.html" target="_blank" title="Wings">Wings</a> - <a>当然是选择原谅它</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+<script>
+    var legalArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','-','.'];
+    function search() {
+        var input = document.getElementById('getUrl').value;
+        if(input === ''){
+            alert('域名不能为空！');
+        }
+        else {
+            var flag = true;
+            if(input.split('.')[0] == 'www'){
+                input = input.substring(4,input.length);
+            }
+            if(input.length > 66 || input.split('.').length > 3){
+                flag = false;
+            }
+            for(var i = 0; i < input.length; i++){
+                if(legalArray.indexOf(input[i]) > -1){}
+                else{
+                    alert(input[i]);
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag == false){
+                alert('输入域名不合法');
+            }
+            else{
+                window.location = 'result.html#' + input;
+            }
+        }
+    }
+
+    $('#getUrl').bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('域名不能为空！');
+            }
+            else {
+                var flag = true;
+                var illegal = '';
+                if(input.split('.')[0] == 'www'){
+                    input = input.substring(4,input.length);
+                }
+                if(input.length > 66 || input.split('.').length > 3){
+                    flag = false;
+                }
+                for(var i = 0; i < input.length; i++){
+                    if(legalArray.indexOf(input[i]) > -1){}
+                    else{
+                        alert(input[i]);
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == false){
+                    alert('输入域名不合法');
+                }
+                else{
+                    window.location = 'result.html#' + input;
+                }
+            }
+        }
+    });
+
+</script>
+
+<script>
+    var loadChart = echarts.init(document.getElementById('loadingChart'));
+    loadChart.showLoading();
+    var getNum = window.location.href.split('#')[1];
+    var getLocation;
+    var number;
+    var code = '';
+    var domain;
+    var jsd;
+    var totalPage;
+    var nowPage;
+    if(getNum == 1){
+        getLocation = 'country=' + window.location.href.split('#')[2];
+    }
+    else{
+        getLocation = 'city=' + window.location.href.split('#')[2];
+	}
+    $.ajax({
+        type: "get",
+        async: true,
+        url: "../country.php?" + getLocation,
+        timeout: 30000,
+        dataType: "json",
+        success: function(result) {
+            jsd = result;
+            number = result.length;
+            document.getElementById('countryName').innerHTML = result[0].country;
+            document.getElementById('countryNumber').innerHTML = '检出恶意域名数：' + result.length;
+            if(number > 50){
+                totalPage = Math.ceil(number / 50);
+                nowPage = 1;
+                number = 50;
+            }
+            else{
+                totalPage = 1;
+                nowPage = 1;
+            }
+            for(var i = 0; i < number; i++){
+                domain = (result[i].domain[result[i].domain.length - 1] == '.') ? result[i].domain.substring(0, result[i].domain.length - 1) : result[i].domain;
+                code += '<tr><th>';
+                code += (i + 1).toString();
+                code += '</th><th>';
+                code += result[i].ip;
+                code += '</th><th><a href="result.html#';
+                code += domain;
+                code += '">';
+                code += domain;
+                code += '</a></th><th>';
+                code += result[i].time;
+                code += '</th><th>';
+                if(result[i].city == 'None' || result[i].city == null){
+                    code += '未知';
+				}
+				else{
+                    code += result[i].city;
+				}
+                code += '</th></tr>';
+            }
+            document.getElementById('loadingChart').style = "height: 100px;width: 100%; display: none";
+            document.getElementById('tb1').innerHTML = code;
+            document.getElementById('nowpage').innerHTML = nowPage + '/' + totalPage;
+            document.getElementById('front').className = 'btn btn-default disabled';
+            document.getElementById('front').style = "color: #5f615e;background-color: #b4b7b2";
+            document.getElementById('inputPage').max = totalPage;
+            if(totalPage == 1) {
+                document.getElementById('next').className = 'btn btn-default disabled';
+                document.getElementById('next').style = "color: #5f615e;background-color: #b4b7b2";
+                document.getElementById('jump').className = 'btn btn-default disabled';
+                document.getElementById('jump').style = "color: #5f615e;background-color: #b4b7b2";
+                document.getElementById('inputPage').isDisabled;
+            }
+        },
+        error: function() {
+            alert("请求数据失败!");
+        }
+    });
+    function nextPage(){
+        code = '';
+        if(nowPage == 1){
+            document.getElementById('front').className = 'btn btn-primary';
+            document.getElementById('front').style = "";
+        }
+        nowPage += 1;
+        if(nowPage == totalPage){
+            number = jsd.length;
+            document.getElementById('next').className = 'btn btn-default disabled';
+            document.getElementById('next').style = "color: #5f615e;background-color: #b4b7b2";
+        }
+        else{
+            number = nowPage * 50;
+        }
+        document.getElementById('nowpage').innerHTML = nowPage + '/' + totalPage;
+        for(var i = 50 * (nowPage - 1); i < number; i++){
+            domain = (jsd[i].domain[jsd[i].domain.length - 1] == '.') ? jsd[i].domain.substring(0, jsd[i].domain.length - 1) : jsd[i].domain;
+            code += '<tr><th>';
+            code += (i + 1).toString();
+            code += '</th><th>';
+            code += jsd[i].ip;
+            code += '</th><th><a href="result.html#';
+            code += domain;
+            code += '">';
+            code += domain;
+            code += '</a></th><th>';
+            code += jsd[i].time;
+            code += '</th><th>';
+            if(jsd[i].city == 'None' || jsd[i].city == null){
+                code += '未知';
+            }
+            else{
+                code += jsd[i].city;
+            }
+            code += '</th></tr>';
+        }
+        document.getElementById('tb1').innerHTML = code;
+    }
+
+    function frontPage(){
+        code = '';
+        if(nowPage == totalPage){
+            number = jsd.length;
+            document.getElementById('next').className = 'btn btn-primary';
+            document.getElementById('next').style = "";
+        }
+        nowPage -= 1;
+        if(nowPage == 1){
+            document.getElementById('front').className = 'btn btn-default disabled';
+            document.getElementById('front').style = "color: #5f615e;background-color: #b4b7b2";
+        }
+        number = nowPage * 50;
+        document.getElementById('nowpage').innerHTML = nowPage + '/' + totalPage;
+        for(var i = 50 * (nowPage - 1); i < number; i++){
+            domain = (jsd[i].domain[jsd[i].domain.length - 1] == '.') ? jsd[i].domain.substring(0, jsd[i].domain.length - 1) : jsd[i].domain;
+            code += '<tr><th>';
+            code += (i + 1).toString();
+            code += '</th><th>';
+            code += jsd[i].ip;
+            code += '</th><th><a href="result.html#';
+            code += domain;
+            code += '">';
+            code += domain;
+            code += '</a></th><th>';
+            code += jsd[i].time;
+            code += '</th><th>';
+            if(jsd[i].city == 'None' || jsd[i].city == null){
+                code += '未知';
+            }
+            else{
+                code += jsd[i].city;
+            }
+            code += '</th></tr>';
+        }
+        document.getElementById('tb1').innerHTML = code;
+    }
+
+    function jumpPage() {
+        code = '';
+        var input = document.getElementById('inputPage').value;
+        if(input != ''){
+            if(input < 1 || input > totalPage){
+                alert("页码超出范围");
+            }
+            else{
+                if(nowPage == totalPage){
+                    number = jsd.length;
+                    document.getElementById('next').className = 'btn btn-primary';
+                    document.getElementById('next').style = "";
+                }
+                if(nowPage == 1){
+                    document.getElementById('front').className = 'btn btn-primary';
+                    document.getElementById('front').style = "";
+                }
+                nowPage = input;
+                if(nowPage == totalPage){
+                    number = jsd.length;
+                    document.getElementById('next').className = 'btn btn-default disabled';
+                    document.getElementById('next').style = "color: #5f615e;background-color: #b4b7b2";
+                }
+                else{
+                    number = nowPage * 50;
+                }
+                if(nowPage == 1){
+                    document.getElementById('front').className = 'btn btn-default disabled';
+                    document.getElementById('front').style = "color: #5f615e;background-color: #b4b7b2";
+                }
+                document.getElementById('nowpage').innerHTML = nowPage + '/' + totalPage;
+                for(var i = 50 * (nowPage - 1); i < number; i++){
+                    domain = (jsd[i].domain[jsd[i].domain.length - 1] == '.') ? jsd[i].domain.substring(0, jsd[i].domain.length - 1) : jsd[i].domain;
+                    code += '<tr><th>';
+                    code += (i + 1).toString();
+                    code += '</th><th>';
+                    code += jsd[i].ip;
+                    code += '</th><th><a href="result.html#';
+                    code += domain;
+                    code += '">';
+                    code += domain;
+                    code += '</a></th><th>';
+                    code += jsd[i].time;
+                    code += '</th><th>';
+                    if(jsd[i].city == 'None' || jsd[i].city == null){
+                        code += '未知';
+                    }
+                    else{
+                        code += jsd[i].city;
+                    }
+                    code += '</th></tr>';
+                }
+                document.getElementById('tb1').innerHTML = code;
+                document.documentElement.scrollTop = document.body.scrollTop = 0;
+            }
+        }
+    }
+
+    $('#inputPage').bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            code = '';
+            var input = document.getElementById('inputPage').value;
+            if(input != ''){
+                if(input < 1 || input > totalPage){
+                    alert("页码超出范围");
+                }
+                else{
+                    if(nowPage == totalPage){
+                        number = jsd.length;
+                        document.getElementById('next').className = 'btn btn-primary';
+                        document.getElementById('next').style = "";
+                    }
+                    if(nowPage == 1){
+                        document.getElementById('front').className = 'btn btn-primary';
+                        document.getElementById('front').style = "";
+                    }
+                    nowPage = input;
+                    if(nowPage == totalPage){
+                        number = jsd.length;
+                        document.getElementById('next').className = 'btn btn-default disabled';
+                        document.getElementById('next').style = "color: #5f615e;background-color: #b4b7b2";
+                    }
+                    else{
+                        number = nowPage * 50;
+                    }
+                    if(nowPage == 1){
+                        document.getElementById('front').className = 'btn btn-default disabled';
+                        document.getElementById('front').style = "color: #5f615e;background-color: #b4b7b2";
+                    }
+                    document.getElementById('nowpage').innerHTML = nowPage + '/' + totalPage;
+                    for(var i = 50 * (nowPage - 1); i < number; i++){
+                        domain = (jsd[i].domain[jsd[i].domain.length - 1] == '.') ? jsd[i].domain.substring(0, jsd[i].domain.length - 1) : jsd[i].domain;
+                        code += '<tr><th>';
+                        code += (i + 1).toString();
+                        code += '</th><th>';
+                        code += jsd[i].ip;
+                        code += '</th><th><a href="result.html#';
+                        code += domain;
+                        code += '">';
+                        code += domain;
+                        code += '</a></th><th>';
+                        code += jsd[i].time;
+                        code += '</th><th>';
+                        if(jsd[i].city == 'None' || jsd[i].city == null){
+                            code += '未知';
+                        }
+                        else{
+                            code += jsd[i].city;
+                        }
+                        code += '</th></tr>';
+                    }
+                    document.getElementById('tb1').innerHTML = code;
+                    document.documentElement.scrollTop = document.body.scrollTop = 0;
+                }
+            }
+        }
+    });
+</script>
+
+	</body>
+</html>
+

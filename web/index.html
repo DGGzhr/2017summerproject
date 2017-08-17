@@ -1,0 +1,1222 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>恶意域名检测 - Wings</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	
+
+	
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script src="echarts/echarts.min.js"></script>
+	<script src="echarts/world.js"></script>
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Logo" class="img-responsive logo" style="float: left"></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的域名...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">检测</button>
+						</div>
+					</div>
+					<ul>
+						<li><button style="height: 40px; background-color: #1e2839;border-width: 0px"><a href="index.html" style="color: white"><strong>概览</strong></a></button></li>
+						<li><a href="IPlocation.html" style="color: white"><strong>域名分布</strong></a></li>
+						<li><a href="malicious.html" style="color: white"><strong>恶意域名</strong></a></li>
+						<li><a href="model.html" style="color: white"><strong>在线模型</strong></a></li>
+						<li class="has-dropdown">
+							<a style="color: white"><strong>帮助</strong></a>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="introduction.html" style="color: black"><strong>系统介绍</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载恶意域名列表" id="download" style="color: white"><a href="../malicious.list"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_2.jpg);height: 110px">
+		<div class="overlay"></div>
+	</header>
+
+	<div class="fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" style="height: 50px"></div>
+				<div class="col-md-6">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<div id="mainchart" style="width: 100%; height: 300px"></div>
+						<div class="text-right" style="width: 100%; font-size: small"><a href="charts.html">详情</a></div>
+						<span style="font-size: large; color: black" class="text-left"><strong>恶意域名地区分布</strong></span>
+						<div id="mainmap" style="width: 100%; height: 300px"></div>
+						<div class="text-right" style="width: 100%; font-size: small"><a href="IPlocation.html">详情</a></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<div  class="col-md-12" style="height: 50px">
+							<span style="font-size: large; color: black" class="text-left"><strong>系统运行情况</strong></span>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4" style="height: 40px">
+								<span style="font-size: large; color: black">系统运行时间</span>
+							</div>
+							<div class="col-md-8" style="height: 40px">
+								<span style="font-size: large; color: black" id="day"></span>
+								<span style="font-size: large; color: black">天</span>
+								<span style="font-size: large; color: black" id="hour"></span>
+								<span style="font-size: large; color: black">小时</span>
+								<span style="font-size: large; color: black" id="minute"></span>
+								<span style="font-size: large; color: black">分钟</span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-3" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">恶意域名数</span>
+								</div>
+							</div>
+							<div class="col-md-5" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">总计：</span>
+									<span style="font-size: medium; color: black" id="badnumber"></span>
+								</div>
+							</div>
+							<div class="col-md-4" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">今日：</span>
+									<span style="font-size: medium; color: black" id="todayBad"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-3" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">检测日志数</span>
+								</div>
+							</div>
+							<div class="col-md-5" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">总计：</span>
+									<span style="font-size: medium; color: black" id="totalnumber"></span>
+								</div>
+							</div>
+							<div class="col-md-4" style="height: 50px">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black">今日：</span>
+									<span style="font-size: medium; color: black" id="todayTotal"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<div class="col-md-12" style="height: 30px">
+							<span style="font-size: large; color: black" class="text-left"><strong>最近检测出的恶意域名</strong></span>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div style="height: 30px"></div>
+								<div class="weekly-summary text-left">
+									<span style="font-size: large">IP</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div style="height: 30px"></div>
+								<div class="weekly-summary text-left">
+									<span style="font-size: large">域名</span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div style="height: 30px"></div>
+								<div class="weekly-summary text-right">
+									<span style="font-size: large">检出时间</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP1"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain1"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time1"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP2"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain2"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time2"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP3"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain3"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time3"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP4"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain4"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time4"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP5"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain5"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time5"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP6"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain6"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time6"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP7"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain7"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time7"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP8"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain8"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time8"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP9"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain9"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time9"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: black" id="IP10"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-left">
+									<span style="font-size: medium; color: darkred" id="domain10"></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="weekly-summary text-right">
+									<span style="font-size: medium; color: black" id="time10"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="text-right" style="width: 100%; font-size: small"><a href="malicious.html">更多</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-4 text-center">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-cloud2"></i>
+						</span>
+						<h3 style="color: black">在线学习</h3>
+						<p class="text-left" style="color: black">在我们的算法中解决了一个棘手的实际问题：当一个恶意域名刚刚出现，且只持续在几个小时或几天的时间内，市面上的黑名单还没有来得及将其加入到其中的时候，我们如何让我们的检测模型将其发现并及时的做出相应？
+							在线学习的算法在近几年被提出，目的在于使训练的检测模型得到及时的更新以面对多变的情景，我们的系统成功地将在线学习算法应用到实践之中，并取得了良好的效果。</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 text-center">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-leaf"></i>
+						</span>
+						<h3 style="color: black">小数据集更新</h3>
+						<p class="text-left" style="color: black">我们是一个工作在数据流上的系统，在检测的过程中并不能知道待检域名的准确标签值（即是否为恶意）。在新的时间片结束时，使用全部数据进行标定来更新模型工程巨大，不可能使用人工标定。
+							因此我们提出了只抽取其中占1%~5%的小数据集进行精确地验证，而这一部分小数据集是我们原有固定检测模型所可能产生误判的部分。并且通过这部分小代价的标定，最终实现了检测率的提高和在线学习模型的更新。</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 text-center">
+					<div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i class="icon-air"></i>
+						</span>
+						<h3 style="color: black">海量域名检测</h3>
+						<p class="text-left" style="color: black">一个大型企业每天多达上亿次的域名解析请求，会产生上千万条各不相同的域名记录。这已经远远超出了人工检测的能力范围，引入机器学习的检测可以较好减轻认理负担。但更多的，如何准确、及时地检测出这些域名中的威胁是我们小组关心的重点。
+							我们系统采用Hadoop+Spark的云端处理平台处理流模式化的DNS解析数据，提取了适用于日志流分析的特征来训练模型，经测试对大规模数据也有良好的处理效率与准确率。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2017 <a href="about.html" target="_blank" title="Wings">Wings</a> - <a>当然是选择原谅它</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	<script>
+        var mainChart = echarts.init(document.getElementById('mainchart'));
+        mainOption = {
+            title: {
+                text: '一周内检测域名数变化',
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function(a){
+                    var value = '';
+                    value = a[0].name + '</br>检测域名数:';
+                    value += a[0].value;
+                    value += '万</br>检出恶意域名数:';
+                    value += a[1].value;
+                    return value;
+                }
+            },
+            legend: {
+                icon: 'circle',
+                itemWidth: 10,
+                itemHeight: 10,
+                itemGap: 13,
+                data: ['检测域名数(单位：万条)', '检出恶意域名数(单位：条)'],
+                top:'10%',
+                right: '0%',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#000000'
+                }
+            },
+            xAxis:  {
+                type: 'category',
+                boundaryGap: false,
+                data: ['07-23','','','','','','07-24','','','','','','07-25','','','','','','07-26','','','','','','07-27','','','','','']
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            grid: {
+                left: '10%',
+                right: '3%',
+                bottom: '10%',
+                containLabel: false
+            },
+            series: [
+                {
+                    name:'检测域名数(单位：万条)',
+                    type:'line',
+                    smooth: false,
+                    showSymbol: true,
+                    data:[
+                        {name:'07-23 00:00',value:886.8},
+                        {name:'07-23 04:00',value:693.9},
+                        {name:'07-23 08:00',value:1777.9},
+                        {name:'07-23 12:00',value:1861.3},
+                        {name:'07-23 16:00',value:1725.0},
+                        {name:'07-23 20:00',value:1659.2},
+                        {name:'07-24 00:00',value:879.3},
+                        {name:'07-24 04:00',value:650.5},
+                        {name:'07-24 08:00',value:1441.1},
+                        {name:'07-24 12:00',value:1611.6},
+                        {name:'07-24 16:00',value:1566.8},
+                        {name:'07-24 20:00',value:1554.9},
+                        {name:'07-25 00:00',value:860.1},
+                        {name:'07-25 04:00',value:633.7},
+                        {name:'07-25 08:00',value:1378.4},
+                        {name:'07-25 12:00',value:1474.3},
+                        {name:'07-25 16:00',value:1475.7},
+                        {name:'07-25 20:00',value:1533.9},
+                        {name:'07-26 00:00',value:780.3},
+                        {name:'07-26 04:00',value:700.6},
+                        {name:'07-26 08:00',value:1809.7},
+                        {name:'07-26 12:00',value:1949.9},
+                        {name:'07-26 16:00',value:1896.3},
+                        {name:'07-26 20:00',value:1848.1},
+                        {name:'07-27 00:00',value:904.2},
+                        {name:'07-27 04:00',value:718.3},
+                        {name:'07-27 08:00',value:1827.5},
+                        {name:'07-27 12:00',value:2019.2},
+                        {name:'07-27 16:00',value:1947.7},
+                        {name:'07-27 20:00',value:1870.7}
+					]
+                },
+                {
+                    name:'检出恶意域名数(单位：条)',
+                    type:'line',
+                    smooth: false,
+                    showSymbol: true,
+                    data:[
+                        {name:'07-23 00:00',value:112},
+                        {name:'07-23 04:00',value:243},
+                        {name:'07-23 08:00',value:979},
+                        {name:'07-23 12:00',value:1150},
+                        {name:'07-23 16:00',value:506},
+                        {name:'07-23 20:00',value:852},
+                        {name:'07-24 00:00',value:383},
+                        {name:'07-24 04:00',value:372},
+                        {name:'07-24 08:00',value:1010},
+                        {name:'07-24 12:00',value:1293},
+                        {name:'07-24 16:00',value:832},
+                        {name:'07-24 20:00',value:674},
+                        {name:'07-25 00:00',value:557},
+                        {name:'07-25 04:00',value:87},
+                        {name:'07-25 08:00',value:310},
+                        {name:'07-25 12:00',value:388},
+                        {name:'07-25 16:00',value:871},
+                        {name:'07-25 20:00',value:288},
+                        {name:'07-26 00:00',value:143},
+                        {name:'07-26 04:00',value:382},
+                        {name:'07-26 08:00',value:1328},
+                        {name:'07-26 12:00',value:940},
+                        {name:'07-26 16:00',value:711},
+                        {name:'07-26 20:00',value:1657},
+                        {name:'07-27 00:00',value:576},
+                        {name:'07-27 04:00',value:225},
+                        {name:'07-27 08:00',value:362},
+                        {name:'07-27 12:00',value:1320},
+                        {name:'07-27 16:00',value:1498},
+                        {name:'07-27 20:00',value:427}
+                    ]
+                }
+            ]
+        };
+        mainChart.setOption(mainOption);
+	</script>
+	<script>
+        var startDate = new Date("2017-07-22 23:27:00");
+        var nowDate = new Date();
+        var second1 = startDate.getTime();
+        var second2 = nowDate.getTime();
+        var day = Math.floor((second2 - second1) / 1000 / 60 / 60 / 24);
+        var hour = Math.floor((second2 - second1) / 1000 / 60 / 60) - 24 * day;
+        var minute = Math.floor((second2 - second1) / 1000 / 60) - (24 * day + hour) * 60;
+        document.getElementById('day').innerHTML = day;
+        document.getElementById('hour').innerHTML = hour;
+        document.getElementById('minute').innerHTML = minute;
+        setInterval(function() {
+            var nowDate1 = new Date();
+            second1 = startDate.getTime();
+            second2 = nowDate1.getTime();
+            var day = Math.floor((second2 - second1) / 1000 / 60 / 60 / 24);
+            var hour = Math.floor((second2 - second1) / 1000 / 60 / 60) - 24 * day;
+            var minute = Math.floor((second2 - second1) / 1000 / 60) - (24 * day + hour) * 60;
+            document.getElementById('day').innerHTML = day;
+            document.getElementById('hour').innerHTML = hour;
+            document.getElementById('minute').innerHTML = minute;
+        }, 10000);
+	</script>
+
+	<script>
+        var data;
+        var total;
+        var bad;
+        var todayTotal;
+        var todayBad;
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "../count.php",
+            timeout: 30000,
+            dataType: "json",
+            success: function(result) {
+                total = 419369732 + result[1];
+                bad = 20476 + parseInt(result[0]);
+                todayTotal = result[1];
+                todayBad = result[0];
+                document.getElementById('totalnumber').innerHTML = total;
+                document.getElementById('badnumber').innerHTML = bad;
+                document.getElementById('todayTotal').innerHTML = todayTotal;
+                document.getElementById('todayBad').innerHTML = todayBad;
+            },
+            error: function() {
+                alert("获取数据失败!");
+            }
+        });
+
+        setInterval(function() {
+            phpResult=$.ajax({url:"count.php",async:false});
+            data = eval('(' + phpResult.responseText + ')');
+            total = 419369732 + data[1];
+            bad = 20476 + parseInt(data[0]);
+            todayTotal = data[1];
+            todayBad = data[0];
+            document.getElementById('totalnumber').innerHTML = total;
+            document.getElementById('badnumber').innerHTML = bad;
+            document.getElementById('todayTotal').innerHTML = todayTotal;
+            document.getElementById('todayBad').innerHTML = todayBad;
+        }, 30000);
+	</script>
+
+	<script type="text/javascript">
+        var mapChart = echarts.init(document.getElementById('mainmap'));
+        mapChart.showLoading();
+
+        function makeMapData(rawData) {
+            var mapData = [];
+            for (var i = 0; i < rawData.length; i++) {
+                var geoCoord = geoCoordMap[rawData[i][0]];
+                if (geoCoord) {
+                    mapData.push({
+                        name: rawData[i][0],
+                        value: geoCoord.concat(rawData[i].slice(1))
+                    });
+                }
+            }
+            return mapData;
+        }
+
+        var geoCoordMap;
+        var rawData;
+        var code1 = '{';
+        var code2 = '[';
+        var number = 1000;
+
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "../location.php",
+            timeout: 30000,
+            dataType: "json",
+            success: function(result) {
+                if(result.length < 1000){
+                    number = result.length;
+				}
+                for(var i = 0; i < number; i++){
+                    code1 += '\"';
+                    code1 += result[i].city;
+                    code1 += '\": [';
+                    code1 += result[i].longitude;
+                    code1 += ',';
+                    code1 += result[i].latitude;
+                    code1 += '],';
+                    code2 += '[\"';
+                    code2 += result[i].city;
+                    code2 += '\"],';
+                }
+                code1 += '}';
+                code2 += ']';
+                geoCoordMap = eval('(' + code1 + ')');
+                rawData = eval('(' + code2 + ')');
+
+                option2 = {
+                    backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 0.4, [{
+                        offset: 0,
+                        color: '#4b5769'
+                    }, {
+                        offset: 1,
+                        color: '#404a59'
+                    }]),
+                    geo: {
+                        map: 'world',
+                        silent: true,
+                        label: {
+                            emphasis: {
+                                show: false,
+                                areaColor: '#eee'
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 0.2,
+                                borderColor: '#404a59'
+                            }
+                        },
+                        roam: false
+
+                    },
+
+                    series: [
+                        {
+                            name: '恶意域名分布',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            symbolSize: 10,
+                            data: makeMapData(rawData),
+                            activeOpacity: 1,
+                            label: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#010101',
+                                    color: '#b00706'
+                                }
+                            }
+                        }
+                    ]
+                };
+                mapChart.hideLoading();
+                mapChart.setOption(option2);
+            },
+            error: function() {
+                alert("获取数据失败!");
+            }
+        });
+	</script>
+
+	<script>
+        var legalArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','-','.'];
+        function search() {
+            var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('域名不能为空！');
+            }
+            else {
+                var flag = true;
+                if(input.split('.')[0] == 'www'){
+                    input = input.substring(4,input.length);
+                }
+                if(input.length > 66 || input.split('.').length > 3){
+                    flag = false;
+                }
+                for(var i = 0; i < input.length; i++){
+                    if(legalArray.indexOf(input[i]) > -1){}
+                    else{
+                        alert(input[i]);
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == false){
+                    alert('输入域名不合法');
+                }
+                else{
+                    window.location = 'result.html#' + input;
+                }
+            }
+        }
+
+        $('#getUrl').bind('keydown',function(event){
+            if(event.keyCode == "13") {
+                var input = document.getElementById('getUrl').value;
+                if(input === ''){
+                    alert('域名不能为空！');
+                }
+                else {
+                    var flag = true;
+                    var illegal = '';
+                    if(input.split('.')[0] == 'www'){
+                        input = input.substring(4,input.length);
+                    }
+                    if(input.length > 66 || input.split('.').length > 3){
+                        flag = false;
+                    }
+                    for(var i = 0; i < input.length; i++){
+                        if(legalArray.indexOf(input[i]) > -1){}
+                        else{
+                            alert(input[i]);
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag == false){
+                        alert('输入域名不合法');
+                    }
+                    else{
+                        window.location = 'result.html#' + input;
+                    }
+                }
+            }
+        });
+
+	</script>
+
+	<script>
+        var IP1;
+        var IP2;
+        var IP3;
+        var IP4;
+        var IP5;
+        var IP6;
+        var IP7;
+        var IP8;
+        var IP9;
+        var IP10;
+        var domain1;
+        var domain2;
+        var domain3;
+        var domain4;
+        var domain5;
+        var domain6;
+        var domain7;
+        var domain8;
+        var domain9;
+        var domain10;
+        var time1;
+        var time2;
+        var time3;
+        var time4;
+        var time5;
+        var time6;
+        var time7;
+        var time8;
+        var time9;
+        var time10;
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "../time.php?num=13",
+            timeout: 30000,
+            dataType: "json",
+            success: function(result) {
+                IP1 = result[0].ip;
+                IP2 = result[1].ip;
+                IP3 = result[2].ip;
+                IP4 = result[3].ip;
+                IP5 = result[4].ip;
+                IP6 = result[5].ip;
+                IP7 = result[6].ip;
+                IP8 = result[7].ip;
+                IP9 = result[8].ip;
+                IP10 = result[9].ip;
+                domain1 = (result[0].domain[result[0].domain.length - 1] == '.') ? result[0].domain.substring(0, result[0].domain.length - 1) : result[0].domain;
+                if(domain1.indexOf('-') > -1){}
+                else{
+                    if(domain1.length > 22){
+                        if(domain1.length > 44){
+                            domain1 = domain1.substring(0,22) + '</br>' + domain1.substring(22,44) + '</br>' + domain1.substring(44,domain1.length);
+                        }
+                        else{
+                            domain1 = domain1.substring(0,22) + '</br>' + domain1.substring(22,domain1.length);
+                        }
+                    }
+                }
+                domain2 = (result[1].domain[result[1].domain.length - 1] == '.') ? result[1].domain.substring(0, result[1].domain.length - 1) : result[1].domain;
+                if(domain2.indexOf('-') > -1){}
+                else{
+                    if(domain2.length > 22){
+                        if(domain2.length > 44){
+                            domain2 = domain2.substring(0,22) + '</br>' + domain2.substring(22,44) + '</br>' + domain2.substring(44,domain2.length);
+                        }
+                        else{
+                            domain2 = domain2.substring(0,22) + '</br>' + domain2.substring(22,domain2.length);
+                        }
+                    }
+                }
+                domain3 = (result[2].domain[result[2].domain.length - 1] == '.') ? result[2].domain.substring(0, result[2].domain.length - 1) : result[2].domain;
+                if(domain3.indexOf('-') > -1){}
+                else{
+                    if(domain3.length > 22){
+                        if(domain3.length > 44){
+                            domain3 = domain3.substring(0,22) + '</br>' + domain3.substring(22,44) + '</br>' + domain3.substring(44,domain3.length);
+                        }
+                        else{
+                            domain3 = domain3.substring(0,22) + '</br>' + domain3.substring(22,domain3.length);
+                        }
+                    }
+                }
+                domain4 = (result[3].domain[result[3].domain.length - 1] == '.') ? result[3].domain.substring(0, result[3].domain.length - 1) : result[3].domain;
+                if(domain4.indexOf('-') > -1){}
+                else{
+                    if(domain4.length > 22){
+                        if(domain4.length > 44){
+                            domain4 = domain4.substring(0,22) + '</br>' + domain4.substring(22,44) + '</br>' + domain4.substring(44,domain4.length);
+                        }
+                        else{
+                            domain4 = domain4.substring(0,22) + '</br>' + domain4.substring(22,domain4.length);
+                        }
+                    }
+                }
+                domain5 = (result[4].domain[result[4].domain.length - 1] == '.') ? result[4].domain.substring(0, result[4].domain.length - 1) : result[4].domain;
+                if(domain5.indexOf('-') > -1){}
+                else{
+                    if(domain5.length > 22){
+                        if(domain5.length > 44){
+                            domain5 = domain5.substring(0,22) + '</br>' + domain5.substring(22,44) + '</br>' + domain5.substring(44,domain5.length);
+                        }
+                        else{
+                            domain5 = domain5.substring(0,22) + '</br>' + domain5.substring(22,domain5.length);
+                        }
+                    }
+                }
+                domain6 = (result[5].domain[result[5].domain.length - 1] == '.') ? result[5].domain.substring(0, result[5].domain.length - 1) : result[5].domain;
+                if(domain6.indexOf('-') > -1){}
+                else{
+                    if(domain6.length > 22){
+                        if(domain6.length > 44){
+                            domain6 = domain6.substring(0,22) + '</br>' + domain6.substring(22,44) + '</br>' + domain6.substring(44,domain6.length);
+                        }
+                        else{
+                            domain6 = domain6.substring(0,22) + '</br>' + domain6.substring(22,domain6.length);
+                        }
+                    }
+                }
+                domain7 = (result[6].domain[result[6].domain.length - 1] == '.') ? result[6].domain.substring(0, result[6].domain.length - 1) : result[6].domain;
+                if(domain7.indexOf('-') > -1){}
+                else{
+                    if(domain7.length > 22){
+                        if(domain7.length > 44){
+                            domain7 = domain7.substring(0,22) + '</br>' + domain7.substring(22,44) + '</br>' + domain7.substring(44,domain7.length);
+                        }
+                        else{
+                            domain7 = domain7.substring(0,22) + '</br>' + domain7.substring(22,domain7.length);
+                        }
+                    }
+                }
+                domain8 = (result[7].domain[result[7].domain.length - 1] == '.') ? result[7].domain.substring(0, result[7].domain.length - 1) : result[7].domain;
+                if(domain8.indexOf('-') > -1){}
+                else{
+                    if(domain8.length > 22){
+                        if(domain8.length > 44){
+                            domain8 = domain8.substring(0,22) + '</br>' + domain8.substring(22,44) + '</br>' + domain8.substring(44,domain8.length);
+                        }
+                        else{
+                            domain8 = domain8.substring(0,22) + '</br>' + domain8.substring(22,domain8.length);
+                        }
+                    }
+                }
+                domain9 = (result[8].domain[result[8].domain.length - 1] == '.') ? result[8].domain.substring(0, result[8].domain.length - 1) : result[8].domain;
+                if(domain9.indexOf('-') > -1){}
+                else{
+                    if(domain9.length > 22){
+                        if(domain9.length > 44){
+                            domain9 = domain9.substring(0,22) + '</br>' + domain9.substring(22,44) + '</br>' + domain9.substring(44,domain9.length);
+                        }
+                        else{
+                            domain9 = domain9.substring(0,22) + '</br>' + domain9.substring(22,domain9.length);
+                        }
+                    }
+                }
+                domain10 = (result[9].domain[result[9].domain.length - 1] == '.') ? result[9].domain.substring(0, result[9].domain.length - 1) : result[9].domain;
+                if(domain10.indexOf('-') > -1){}
+                else{
+                    if(domain10.length > 22){
+                        if(domain10.length > 44){
+                            domain10 = domain10.substring(0,22) + '</br>' + domain10.substring(22,44) + '</br>' + domain10.substring(44,domain10.length);
+                        }
+                        else{
+                            domain10 = domain10.substring(0,22) + '</br>' + domain10.substring(22,domain10.length);
+                        }
+                    }
+                }
+                time1 = result[0].date.substring(5,16);
+                time2 = result[1].date.substring(5,16);
+                time3 = result[2].date.substring(5,16);
+                time4 = result[3].date.substring(5,16);
+                time5 = result[4].date.substring(5,16);
+                time6 = result[5].date.substring(5,16);
+                time7 = result[6].date.substring(5,16);
+                time8 = result[7].date.substring(5,16);
+                time9 = result[8].date.substring(5,16);
+                time10 = result[9].date.substring(5,16);
+                document.getElementById('IP1').innerHTML = IP1;
+                document.getElementById('IP2').innerHTML = IP2;
+                document.getElementById('IP3').innerHTML = IP3;
+                document.getElementById('IP4').innerHTML = IP4;
+                document.getElementById('IP5').innerHTML = IP5;
+                document.getElementById('IP6').innerHTML = IP6;
+                document.getElementById('IP7').innerHTML = IP7;
+                document.getElementById('IP8').innerHTML = IP8;
+                document.getElementById('IP9').innerHTML = IP9;
+                document.getElementById('IP10').innerHTML = IP10;
+                document.getElementById('domain1').innerHTML = domain1;
+                document.getElementById('domain2').innerHTML = domain2;
+                document.getElementById('domain3').innerHTML = domain3;
+                document.getElementById('domain4').innerHTML = domain4;
+                document.getElementById('domain5').innerHTML = domain5;
+                document.getElementById('domain6').innerHTML = domain6;
+                document.getElementById('domain7').innerHTML = domain7;
+                document.getElementById('domain8').innerHTML = domain8;
+                document.getElementById('domain9').innerHTML = domain9;
+                document.getElementById('domain10').innerHTML = domain10;
+                document.getElementById('time1').innerHTML = time1;
+                document.getElementById('time2').innerHTML = time2;
+                document.getElementById('time3').innerHTML = time3;
+                document.getElementById('time4').innerHTML = time4;
+                document.getElementById('time5').innerHTML = time5;
+                document.getElementById('time6').innerHTML = time6;
+                document.getElementById('time7').innerHTML = time7;
+                document.getElementById('time8').innerHTML = time8;
+                document.getElementById('time9').innerHTML = time9;
+                document.getElementById('time10').innerHTML = time10;
+            },
+        error: function() {
+            alert("获取数据失败!");
+        }
+        });
+	</script>
+
+	<script>
+		var data;
+        var IP1;
+        var IP2;
+        var IP3;
+        var IP4;
+        var IP5;
+        var IP6;
+        var IP7;
+        var IP8;
+        var IP9;
+        var IP10;
+        var domain1;
+        var domain2;
+        var domain3;
+        var domain4;
+        var domain5;
+        var domain6;
+        var domain7;
+        var domain8;
+        var domain9;
+        var domain10;
+        var time1;
+        var time2;
+        var time3;
+        var time4;
+        var time5;
+        var time6;
+        var time7;
+        var time8;
+        var time9;
+        var time10;
+        setInterval(function() {
+            phpResult=$.ajax({url:"time.php?num=10",async:false});
+            data = eval('(' + phpResult.responseText + ')');
+            IP1 = data[0].ip;
+            IP2 = data[1].ip;
+            IP3 = data[2].ip;
+            IP4 = data[3].ip;
+            IP5 = data[4].ip;
+            IP6 = data[5].ip;
+            IP7 = data[6].ip;
+            IP8 = data[7].ip;
+            IP9 = data[8].ip;
+            IP10 = data[9].ip;
+            domain1 = (data[0].domain[data[0].domain.length - 1] == '.') ? data[0].domain.substring(0, data[0].domain.length - 1) : data[0].domain;
+            if(domain1.indexOf('-') > -1){}
+            else{
+                if(domain1.length > 22){
+                    if(domain1.length > 44){
+                        domain1 = domain1.substring(0,22) + '</br>' + domain1.substring(22,44) + '</br>' + domain1.substring(44,domain1.length);
+                    }
+                    else{
+                        domain1 = domain1.substring(0,22) + '</br>' + domain1.substring(22,domain1.length);
+                    }
+                }
+            }
+            domain2 = (data[1].domain[data[1].domain.length - 1] == '.') ? data[1].domain.substring(0, data[1].domain.length - 1) : data[1].domain;
+            if(domain2.indexOf('-') > -1){}
+            else{
+                if(domain2.length > 22){
+                    if(domain2.length > 44){
+                        domain2 = domain2.substring(0,22) + '</br>' + domain2.substring(22,44) + '</br>' + domain2.substring(44,domain2.length);
+                    }
+                    else{
+                        domain2 = domain2.substring(0,22) + '</br>' + domain2.substring(22,domain2.length);
+                    }
+                }
+            }
+            domain3 = (data[2].domain[data[2].domain.length - 1] == '.') ? data[2].domain.substring(0, data[2].domain.length - 1) : data[2].domain;
+            if(domain3.indexOf('-') > -1){}
+            else{
+                if(domain3.length > 22){
+                    if(domain3.length > 44){
+                        domain3 = domain3.substring(0,22) + '</br>' + domain3.substring(22,44) + '</br>' + domain3.substring(44,domain3.length);
+                    }
+                    else{
+                        domain3 = domain3.substring(0,22) + '</br>' + domain3.substring(22,domain3.length);
+                    }
+                }
+            }
+            domain4 = (data[3].domain[data[3].domain.length - 1] == '.') ? data[3].domain.substring(0, data[3].domain.length - 1) : data[3].domain;
+            if(domain4.indexOf('-') > -1){}
+            else{
+                if(domain4.length > 22){
+                    if(domain4.length > 44){
+                        domain4 = domain4.substring(0,22) + '</br>' + domain4.substring(22,44) + '</br>' + domain4.substring(44,domain4.length);
+                    }
+                    else{
+                        domain4 = domain4.substring(0,22) + '</br>' + domain4.substring(22,domain4.length);
+                    }
+                }
+            }
+            domain5 = (data[4].domain[data[4].domain.length - 1] == '.') ? data[4].domain.substring(0, data[4].domain.length - 1) : data[4].domain;
+            if(domain5.indexOf('-') > -1){}
+            else{
+                if(domain5.length > 22){
+                    if(domain5.length > 44){
+                        domain5 = domain5.substring(0,22) + '</br>' + domain5.substring(22,44) + '</br>' + domain5.substring(44,domain5.length);
+                    }
+                    else{
+                        domain5 = domain5.substring(0,22) + '</br>' + domain5.substring(22,domain5.length);
+                    }
+                }
+            }
+            domain6 = (data[5].domain[data[5].domain.length - 1] == '.') ? data[5].domain.substring(0, data[5].domain.length - 1) : data[5].domain;
+            if(domain6.indexOf('-') > -1){}
+            else{
+                if(domain6.length > 22){
+                    if(domain6.length > 44){
+                        domain6 = domain6.substring(0,22) + '</br>' + domain6.substring(22,44) + '</br>' + domain6.substring(44,domain6.length);
+                    }
+                    else{
+                        domain6 = domain6.substring(0,22) + '</br>' + domain6.substring(22,domain6.length);
+                    }
+                }
+            }
+            domain7 = (data[6].domain[data[6].domain.length - 1] == '.') ? data[6].domain.substring(0, data[6].domain.length - 1) : data[6].domain;
+            if(domain7.indexOf('-') > -1){}
+            else{
+                if(domain7.length > 22){
+                    if(domain7.length > 44){
+                        domain7 = domain7.substring(0,22) + '</br>' + domain7.substring(22,44) + '</br>' + domain7.substring(44,domain7.length);
+                    }
+                    else{
+                        domain7 = domain7.substring(0,22) + '</br>' + domain7.substring(22,domain7.length);
+                    }
+                }
+            }
+            domain8 = (data[7].domain[data[7].domain.length - 1] == '.') ? data[7].domain.substring(0, data[7].domain.length - 1) : data[7].domain;
+            if(domain8.indexOf('-') > -1){}
+            else{
+                if(domain8.length > 22){
+                    if(domain8.length > 44){
+                        domain8 = domain8.substring(0,22) + '</br>' + domain8.substring(22,44) + '</br>' + domain8.substring(44,domain8.length);
+                    }
+                    else{
+                        domain8 = domain8.substring(0,22) + '</br>' + domain8.substring(22,domain8.length);
+                    }
+                }
+            }
+            domain9 = (data[8].domain[data[8].domain.length - 1] == '.') ? data[8].domain.substring(0, data[8].domain.length - 1) : data[8].domain;
+            if(domain9.indexOf('-') > -1){}
+            else{
+                if(domain9.length > 22){
+                    if(domain9.length > 44){
+                        domain9 = domain9.substring(0,22) + '</br>' + domain9.substring(22,44) + '</br>' + domain9.substring(44,domain9.length);
+                    }
+                    else{
+                        domain9 = domain9.substring(0,22) + '</br>' + domain9.substring(22,domain9.length);
+                    }
+                }
+            }
+            domain10 = (data[9].domain[data[9].domain.length - 1] == '.') ? data[9].domain.substring(0, data[9].domain.length - 1) : data[9].domain;
+            if(domain10.indexOf('-') > -1){}
+            else{
+                if(domain10.length > 22){
+                    if(domain10.length > 44){
+                        domain10 = domain10.substring(0,22) + '</br>' + domain10.substring(22,44) + '</br>' + domain10.substring(44,domain10.length);
+                    }
+                    else{
+                        domain10 = domain10.substring(0,22) + '</br>' + domain10.substring(22,domain10.length);
+                    }
+                }
+            }
+            time1 = data[0].date.substring(5,16);
+            time2 = data[1].date.substring(5,16);
+            time3 = data[2].date.substring(5,16);
+            time4 = data[3].date.substring(5,16);
+            time5 = data[4].date.substring(5,16);
+            time6 = data[5].date.substring(5,16);
+            time7 = data[6].date.substring(5,16);
+            time8 = data[7].date.substring(5,16);
+            time9 = data[8].date.substring(5,16);
+            time10 = data[9].date.substring(5,16);
+            document.getElementById('IP1').innerHTML = IP1;
+            document.getElementById('IP2').innerHTML = IP2;
+            document.getElementById('IP3').innerHTML = IP3;
+            document.getElementById('IP4').innerHTML = IP4;
+            document.getElementById('IP5').innerHTML = IP5;
+            document.getElementById('IP6').innerHTML = IP6;
+            document.getElementById('IP7').innerHTML = IP7;
+            document.getElementById('IP8').innerHTML = IP8;
+            document.getElementById('IP9').innerHTML = IP9;
+            document.getElementById('IP10').innerHTML = IP10;
+            document.getElementById('domain1').innerHTML = domain1;
+            document.getElementById('domain2').innerHTML = domain2;
+            document.getElementById('domain3').innerHTML = domain3;
+            document.getElementById('domain4').innerHTML = domain4;
+            document.getElementById('domain5').innerHTML = domain5;
+            document.getElementById('domain6').innerHTML = domain6;
+            document.getElementById('domain7').innerHTML = domain7;
+            document.getElementById('domain8').innerHTML = domain8;
+            document.getElementById('domain9').innerHTML = domain9;
+            document.getElementById('domain10').innerHTML = domain10;
+            document.getElementById('time1').innerHTML = time1;
+            document.getElementById('time2').innerHTML = time2;
+            document.getElementById('time3').innerHTML = time3;
+            document.getElementById('time4').innerHTML = time4;
+            document.getElementById('time5').innerHTML = time5;
+            document.getElementById('time6').innerHTML = time6;
+            document.getElementById('time7').innerHTML = time7;
+            document.getElementById('time8').innerHTML = time8;
+            document.getElementById('time9').innerHTML = time9;
+            document.getElementById('time10').innerHTML = time10;
+        }, 30000);
+
+	</script>
+
+	</body>
+</html>
+

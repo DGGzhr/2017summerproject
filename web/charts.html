@@ -1,0 +1,762 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>恶意域名检测 - 图表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+
+
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script src="echarts/echarts.min.js"></script>
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+
+</head>
+<body>
+
+<div class="fh5co-loader"></div>
+
+<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="fh5co-logo"><a href="index.html"><img src="images/logo.png" alt="Logo" class="img-responsive logo" style="float: left"></a></div>
+				</div>
+				<div class="col-xs-10 text-right menu-1">
+					<div class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" id="getUrl" value="" class="form-control" style="width: 300px;height: 35px;background-color: white" placeholder="请输入要查询的域名...">
+							<button type="button" id="search" class="btn btn-default" onclick="search()" style="background-color: #ff5931;border-color: #ff5931;color: white;height: 35px">检测</button>
+						</div>
+					</div>
+					<ul>
+						<li><a href="index.html" style="color: white"><strong>概览</strong></a></li>
+						<li><a href="IPlocation.html" style="color: white"><strong>域名分布</strong></a></li>
+						<li><a href="malicious.html" style="color: white"><strong>恶意域名</strong></a></li>
+						<li><a href="model.html" style="color: white"><strong>在线模型</strong></a></li>
+						<li class="has-dropdown">
+							<a style="color: white"><strong>帮助</strong></a>
+							<ul class="dropdown">
+								<li><a href="help.html" style="color: black"><strong>如何使用</strong></a></li>
+								<li><a href="introduction.html" style="color: black"><strong>系统介绍</strong></a></li>
+								<li><a href="about.html" style="color: black"><strong>关于我们</strong></a></li>
+							</ul>
+						</li>
+						<li class="btn-cta" title="下载恶意域名列表" id="download" style="color: white"><a href="../malicious.list"><span><strong>下载</strong></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(images/img_bg_2.jpg); height: 110px">
+		<div class="overlay"></div>
+	</header>
+
+	<div id="fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 animate-box">
+					<div style="height: 30px"></div>
+					<div class="col-md-8">
+						<div id="totalchart" style="width: 100%; height: 300px"></div>
+						<div id="badchart" style="width: 100%; height: 300px"></div>
+					</div>
+					<div class="col-md-4">
+						<div class="row">
+							<div class="col-md-10">
+								<div style="height: 80px"></div>
+								<div class="weekly-summary text-right">
+									<span class="info-label">累计检测日志数</span>
+								</div>
+								<div class="weekly-summary text-right">
+									<span style="font-size: xx-large" id="totalnumber"></span>
+								</div>
+								<div style="height: 10px"></div>
+								<div class="weekly-summary text-right">
+									<span class="info-label">累计检出恶意域名数</span>
+								</div>
+								<div class="weekly-summary text-right">
+									<span style="font-size: xx-large" id="badnumber"></span>
+								</div>
+								<div style="height: 50px"></div>
+								<div class="weekly-summary text-right">
+									<span class="info-label" id="largest">今日检测日志数</span>
+								</div>
+								<div class="weekly-summary text-right">
+									<span style="font-size: xx-large" id="todayTotal"></span>
+								</div>
+								<div style="height: 10px"></div>
+								<div class="weekly-summary text-right">
+									<span class="info-label" id="smallest">今日检出恶意域名数</span>
+								</div>
+								<div class="weekly-summary text-right">
+									<span style="font-size: xx-large" id="todayBad"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 animate-box">
+					<div class="col-md-8">
+						<div id="ipchart" style="width: 100%; height: 350px"></div>
+					</div>
+					<div class="col-md-4">
+						<div id="ipPercentageChart" style="width: 100%; height: 350px"></div>
+					</div>
+				</div>
+				<div class="col-md-12 animate-box">
+					<div class="col-md-8">
+						<div id="numberchart" style="width: 100%; height: 350px"></div>
+					</div>
+					<div class="col-md-4">
+						<div id="numberPercentageChart" style="width: 100%; height: 350px"></div>
+					</div>
+				</div>
+				<div class="col-md-12 animate-box" style="height: 100px"></div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2017 <a href="about.html" target="_blank" title="Wings">Wings</a> - <a>当然是选择原谅它</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+<script>
+    var totalChart = echarts.init(document.getElementById('totalchart'));
+    var totalData = [
+        {name:'07-23 00:00',value:886.8},
+        {name:'07-23 04:00',value:693.9},
+        {name:'07-23 08:00',value:1777.9},
+        {name:'07-23 12:00',value:1861.3},
+        {name:'07-23 16:00',value:1725.0},
+        {name:'07-23 20:00',value:1659.2},
+        {name:'07-24 00:00',value:879.3},
+        {name:'07-24 04:00',value:650.5},
+        {name:'07-24 08:00',value:1441.1},
+        {name:'07-24 12:00',value:1611.6},
+        {name:'07-24 16:00',value:1566.8},
+        {name:'07-24 20:00',value:1554.9},
+        {name:'07-25 00:00',value:860.1},
+        {name:'07-25 04:00',value:633.7},
+        {name:'07-25 08:00',value:1378.4},
+        {name:'07-25 12:00',value:1474.3},
+        {name:'07-25 16:00',value:1475.7},
+        {name:'07-25 20:00',value:1533.9},
+        {name:'07-26 00:00',value:780.3},
+        {name:'07-26 04:00',value:700.6},
+        {name:'07-26 08:00',value:1809.7},
+        {name:'07-26 12:00',value:1949.9},
+        {name:'07-26 16:00',value:1896.3},
+        {name:'07-26 20:00',value:1848.1},
+        {name:'07-27 00:00',value:904.2},
+        {name:'07-27 04:00',value:718.3},
+        {name:'07-27 08:00',value:1827.5},
+        {name:'07-27 12:00',value:2019.2},
+        {name:'07-27 16:00',value:1947.7},
+        {name:'07-27 20:00',value:1870.7}
+    ];
+    totalOption = {
+        title: {
+            text: '检测日志数变化'
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(a){
+                var value = '';
+                value = a[0].name + '</br>检测域名数:';
+                value += a[0].value;
+                value += '万';
+                return value;
+            }
+        },
+        legend: {
+            icon: 'circle',
+            itemWidth: 10,
+            itemHeight: 10,
+            itemGap: 13,
+            data: ['检测域名数(单位：万条)'],
+            top:'10%',
+            right: '0%',
+            textStyle: {
+                fontSize: 12,
+                color: '#000000'
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['07-23','','','','','','07-24','','','','','','07-25','','','','','','07-26','','','','','','07-27','','','','','']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        grid: {
+            left: '10%',
+            right: '3%',
+            bottom: '10%',
+            top:'18%',
+            containLabel: false
+        },
+        series: [
+            {
+                name:'检测域名数(单位：万条)',
+                type:'line',
+                smooth: false,
+                showSymbol: true,
+                showAllSymbol: true,
+                data:totalData
+            }
+        ]
+    };
+
+    totalChart.setOption(totalOption);
+    totalChart.on('click', function (params) {
+        var url;
+        if(params.name.length < 6){
+            url = '2017-' + params.name + ' 00:00:00';
+        }
+        else{
+            url = '2017-' + params.name + ':00';
+        }
+        window.open('time.html#' + url, '_parent');
+    });
+
+    var badChart = echarts.init(document.getElementById('badchart'));
+    var badData = [
+        {name:'07-23 00:00',value:112},
+        {name:'07-23 04:00',value:243},
+        {name:'07-23 08:00',value:979},
+        {name:'07-23 12:00',value:1150},
+        {name:'07-23 16:00',value:506},
+        {name:'07-23 20:00',value:852},
+        {name:'07-24 00:00',value:383},
+        {name:'07-24 04:00',value:372},
+        {name:'07-24 08:00',value:1010},
+        {name:'07-24 12:00',value:1293},
+        {name:'07-24 16:00',value:832},
+        {name:'07-24 20:00',value:674},
+        {name:'07-25 00:00',value:557},
+        {name:'07-25 04:00',value:87},
+        {name:'07-25 08:00',value:310},
+        {name:'07-25 12:00',value:388},
+        {name:'07-25 16:00',value:871},
+        {name:'07-25 20:00',value:288},
+        {name:'07-26 00:00',value:143},
+        {name:'07-26 04:00',value:382},
+        {name:'07-26 08:00',value:1328},
+        {name:'07-26 12:00',value:940},
+        {name:'07-26 16:00',value:711},
+        {name:'07-26 20:00',value:1657},
+        {name:'07-27 00:00',value:576},
+        {name:'07-27 04:00',value:225},
+        {name:'07-27 08:00',value:362},
+        {name:'07-27 12:00',value:1320},
+        {name:'07-27 16:00',value:1498},
+        {name:'07-27 20:00',value:427}
+    ];
+    badOption = {
+        title: {
+            text: '检出恶意域名数变化'
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: function(a){
+                var value = '';
+                value = a[0].name + '</br>检出恶意域名数:';
+                value += a[0].value;
+                return value;
+            }
+        },
+        legend: {
+            icon: 'circle',
+            itemWidth: 10,
+            itemHeight: 10,
+            itemGap: 13,
+            data: ['检出恶意域名数(单位：条)'],
+            top:'10%',
+            right: '0%',
+            textStyle: {
+                fontSize: 12,
+                color: '#000000'
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['07-23','','','','','','07-24','','','','','','07-25','','','','','','07-26','','','','','','07-27','','','','','']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        grid: {
+            left: '10%',
+            right: '3%',
+            bottom: '10%',
+            top:'18%',
+            containLabel: false
+        },
+        series: [
+            {
+                name:'检出恶意域名数(单位：条)',
+                type:'line',
+                smooth: false,
+                showSymbol: true,
+                showAllSymbol: true,
+                itemStyle:{
+                    normal:{
+                        lineStyle:{
+                            color: '#193047',
+                        }
+                    }
+                },
+                data:badData
+            }
+        ]
+    };
+
+    badChart.setOption(badOption);
+    badChart.on('click', function (params) {
+        var url;
+        if(params.name.length < 6){
+            url = '2017-' + params.name + ' 00:00:00';
+		}
+		else{
+            url = '2017-' + params.name + ':00';
+		}
+        window.open('time.html#' + url, '_parent');
+    });
+</script>
+
+<script>
+    var data;
+    var total;
+    var bad;
+    var todayTotal;
+    var todayBad;
+    $.ajax({
+        type: "get",
+        async: true,
+        url: "../count.php",
+        timeout: 30000,
+        dataType: "json",
+        success: function(result) {
+            total = 419369732 + result[1];
+            bad = 20476 + parseInt(result[0]);
+            todayTotal = result[1];
+            todayBad = result[0];
+            document.getElementById('totalnumber').innerHTML = total;
+            document.getElementById('badnumber').innerHTML = bad;
+            document.getElementById('todayTotal').innerHTML = todayTotal;
+            document.getElementById('todayBad').innerHTML = todayBad;
+        },
+        error: function() {
+            alert("获取数据失败!");
+        }
+    });
+
+    setInterval(function() {
+        phpResult=$.ajax({url:"count.php",async:false});
+        data = eval('(' + phpResult.responseText + ')');
+        total = 419369732 + data[1];
+        bad = 20476 + parseInt(data[0]);
+        todayTotal = data[1];
+        todayBad = data[0];
+        document.getElementById('totalnumber').innerHTML = total;
+        document.getElementById('badnumber').innerHTML = bad;
+        document.getElementById('todayTotal').innerHTML = todayTotal;
+        document.getElementById('todayBad').innerHTML = todayBad;
+    }, 30000);
+</script>
+
+	<script>
+	var ipChart = echarts.init(document.getElementById('ipchart'));
+    var ipPercentageChart = echarts.init(document.getElementById('ipPercentageChart'));
+    ipChart.showLoading();
+    ipPercentageChart.showLoading();
+    var ipCode1 = '[';
+    var ipCode2 = '[';
+    var ipPercentageCode = '[';
+    var ipData1;
+    var ipData2;
+    var ipPercentageData;
+    var ipoption;
+    var ipPercentageOption;
+
+    $.ajax({
+        type: "get",
+        async: true,
+        url: "../country_count.php",
+        timeout: 30000,
+        dataType: "json",
+        success: function(result) {
+            for(var i = 4; i >= 0; i--){
+                ipCode1 += '\'';
+                ipCode1 += result[i].country;
+                ipCode1 += '\',';
+                ipCode2 += result[i].count;
+                ipCode2 += ',';
+                ipPercentageCode += '{value:';
+                ipPercentageCode += result[i].count;
+                ipPercentageCode += ', name:\'';
+                ipPercentageCode += result[i].country;
+                ipPercentageCode += '\'},';
+            }
+            ipCode1 += ']';
+            ipCode2 += ']';
+            ipPercentageCode += ']';
+            ipData1 = eval('(' + ipCode1 + ')');
+            ipData2 = eval('(' + ipCode2 + ')');
+            ipPercentageData = eval('(' + ipPercentageCode + ')');
+            ipoption = {
+                title: {
+                    text: '恶意域名分布地区TOP5',
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    formatter: "{a} <br/>{b} : {c}"
+                },
+                grid: {
+                    left: '20%',
+                    right: '3%',
+                    bottom: '10%',
+                    containLabel: false
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01],
+                    "axisLabel": {
+                        "interval": 0,
+                        formatter: '{value}',
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ipData1
+                },
+                series: [{
+                    name: '恶意域名数量',
+                    type: 'bar',
+                    data: ipData2,
+                    itemStyle: {
+                        normal: {
+                            color: '#c23531'
+                        }
+                    }
+                }]
+            };
+            ipChart.hideLoading();
+            ipChart.setOption(ipoption);
+
+            ipPercentageOption = {
+                visualMap: {
+                    show: false,
+                    min: 80,
+                    max: 600,
+                    inRange: {
+                        colorLightness: [0.3, 0.8]
+                    }
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                series : [
+                    {
+                        name: '恶意域名占比',
+                        type: 'pie',
+                        radius: '55%',
+                        data:ipPercentageData,
+                        itemStyle: {
+                            normal: {
+                                color: '#c23531',
+                                shadowBlur: 150,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            ipPercentageChart.hideLoading();
+            ipPercentageChart.setOption(ipPercentageOption);
+        },
+        error: function() {
+            alert("获取数据失败!");
+        }
+    });
+
+	ipChart.on('click', function (params) {
+        window.open('country.html#1#' + params.name, '_parent');
+    });
+
+    ipPercentageChart.on('click', function (params) {
+        window.open('country.html#1#' + params.name, '_parent');
+    });
+
+	</script>
+
+	<script>
+        var numberChart = echarts.init(document.getElementById('numberchart'));
+        var numberPercentageChart = echarts.init(document.getElementById('numberPercentageChart'));
+        numberChart.showLoading();
+        numberPercentageChart.showLoading();
+        var numberCode1 = '[';
+        var numberCode2 = '[';
+        var numberPercentageCode = '[';
+        var numberData1;
+        var numberData2;
+        var numberPercentageData;
+        var numberoption;
+        var numberPercentageOption;
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "../first_last.php",
+            timeout: 30000,
+            dataType: "json",
+            success: function(result) {
+                for(var i = 4; i >= 0; i--){
+                    numberCode1 += '\'';
+                    numberCode1 += (result[i].domain[result[i].domain.length - 1] == '.') ? result[i].domain.substring(0, result[i].domain.length - 1) : result[i].domain;
+                    numberCode1 += '\',';
+                    numberCode2 += result[i].num;
+                    numberCode2 += ',';
+                    numberPercentageCode += '{value:';
+                    numberPercentageCode += result[i].num;
+                    numberPercentageCode += ', name:\'';
+                    numberPercentageCode += (result[i].domain[result[i].domain.length - 1] == '.') ? result[i].domain.substring(0, result[i].domain.length - 1) : result[i].domain;
+                    numberPercentageCode += '\'},';
+                }
+                numberCode1 += ']';
+                numberCode2 += ']';
+                numberPercentageCode += ']';
+                numberData1 = eval('(' + numberCode1 + ')');
+                numberData2 = eval('(' + numberCode2 + ')');
+                numberPercentageData = eval('(' + numberPercentageCode + ')');
+
+                numberoption = {
+                    title: {
+                        text: '恶意域名出现次数TOP5',
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        formatter: "{a} <br/>{b} : {c}"
+                    },
+                    grid: {
+                        left: '20%',
+                        right: '3%',
+                        bottom: '10%',
+                        containLabel: false
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        "axisLabel": {
+                            "interval": 0,
+                            formatter: '{value}',
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: numberData1
+                    },
+                    series: [{
+                        name: '出现次数',
+                        type: 'bar',
+                        data: numberData2,
+                        itemStyle: {
+                            normal: {
+                                color: '#163a58'
+                            }
+                        }
+                    }]
+                };
+                numberChart.hideLoading();
+                numberChart.setOption(numberoption);
+
+                numberPercentageOption = {
+                    visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                            colorLightness: [0.3, 0.8]
+                        }
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    series : [
+                        {
+                            name: '恶意域名出现次数',
+                            type: 'pie',
+                            radius: '55%',
+                            data:numberPercentageData,
+                            itemStyle: {
+                                normal: {
+                                    color: '#163a58',
+                                    shadowBlur: 150,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                numberPercentageChart.hideLoading();
+                numberPercentageChart.setOption(numberPercentageOption);
+            },
+            error: function() {
+                alert("获取数据失败!");
+            }
+        });
+
+        numberChart.on('click', function (params) {
+            window.open('result.html#' + params.name, '_parent');
+        });
+
+        numberPercentageChart.on('click', function (params) {
+            window.open('result.html#' + params.name, '_parent');
+        });
+	</script>
+
+<script>
+    var legalArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0','-','.'];
+    function search() {
+        var input = document.getElementById('getUrl').value;
+        if(input === ''){
+            alert('域名不能为空！');
+        }
+        else {
+            var flag = true;
+            if(input.split('.')[0] == 'www'){
+                input = input.substring(4,input.length);
+            }
+            if(input.length > 66 || input.split('.').length > 3){
+                flag = false;
+            }
+            for(var i = 0; i < input.length; i++){
+                if(legalArray.indexOf(input[i]) > -1){}
+                else{
+                    alert(input[i]);
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag == false){
+                alert('输入域名不合法');
+            }
+            else{
+                window.location = 'result.html#' + input;
+            }
+        }
+    }
+
+    $('#getUrl').bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            var input = document.getElementById('getUrl').value;
+            if(input === ''){
+                alert('域名不能为空！');
+            }
+            else {
+                var flag = true;
+                var illegal = '';
+                if(input.split('.')[0] == 'www'){
+                    input = input.substring(4,input.length);
+                }
+                if(input.length > 66 || input.split('.').length > 3){
+                    flag = false;
+                }
+                for(var i = 0; i < input.length; i++){
+                    if(legalArray.indexOf(input[i]) > -1){}
+                    else{
+                        alert(input[i]);
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == false){
+                    alert('输入域名不合法');
+                }
+                else{
+                    window.location = 'result.html#' + input;
+                }
+            }
+        }
+    });
+
+</script>
+
+	</body>
+</html>
+
